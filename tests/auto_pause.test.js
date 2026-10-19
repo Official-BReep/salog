@@ -1,0 +1,11 @@
+const fs = require('fs');
+const assert = require('assert');
+const html = fs.readFileSync('index.html','utf8');
+assert(html.includes('function limitStock(n)'));
+assert(html.includes("return (state.queues[n.id]||[]).reduce((sum,p)=>sum+(p.item===item?1:0),0)"));
+assert(html.includes('function machinePaused(n){return !!(state.pauseAllMachines||n.manualPaused||n.limitPaused)}'));
+assert(html.includes('n.limitPaused=limitReached(n);'));
+assert(html.includes('Global machine pause cleared. Individually manually paused machines remain paused'));
+assert(html.includes('Buffered items keep moving onto connected belts'));
+assert(!html.includes('n.limitPaused=true;n.manualPaused=true'));
+console.log('Automatic pause/resume source checks passed.');
